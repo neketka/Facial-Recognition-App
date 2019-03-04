@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+
+
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Aerosoft</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/model_pca_20_svm.js"></script>
+        <script src="js/clmtrackr.js"></script>
+        <script src="js/facerecog.js"></script>
+        <script src="js/eastereggs.js"></script>
+
+        <style>
+            .registerFace {
+                background-color :   #99b3ff
+;
+                border: none;
+                color: black;
+                padding: 4px 33px;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px
+                cursor: pointer;
+                font-family: "Arial";
+            }
+            .verifying {
+                background-color: #99b3ff;
+                border: none;
+                color: black;
+                width: 130;
+                padding: 4px;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px
+                cursor: pointer;
+                font-family: "Arial";
+            }
+            .text {
+                border: none;
+                color: black;
+                padding: 4px 5px;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px;
+                font-family: "Arial";
+            }
+            video {
+                border: solid black 1px;
+            }
+            .registerFace:hover{
+                box-shadow: 1px 1px 1px #1a53ff;
+            }
+            .registerFace:active{
+                background-color:#1a53ff;
+            }
+            .verifying:active{
+                background-color:#1a53ff;
+            }
+             .verifying:hover{
+                box-shadow: 1px 1px 1px #1a53ff;
+            }
+            .GreatEasterEgg{
+                color : #E6E6E6;
+                padding:0.1px 0.1px;
+            }
+            .GreatEasterEgg:hover{
+               color: black;
+            }
+      
+     
+        </style>
+  
+    </head>
+    <body style="background-color:#E6E6E6;">
+        <video id="facevideo" width="460" height="300" autoplay></video>
+        <canvas id="face" style="position: absolute; left: 0px; right: 0px;" width="460" height="300"></canvas>
+        <script>
+        $(document).ready(function() {
+            var avideo = document.getElementById('facevideo');
+            alert(navigator.mediaDevices.getUserMedia);
+            if(navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    console.log(stream)
+                    avideo.src = window.URL.createObjectURL(stream);
+                    console.log(window.URL.createObjectURL(stream));
+                    avideo.play();
+                }); 
+            }
+        });
+        </script>
+        <br/>
+        <button id="RegisterWebsite" class="registerFace">Register Website</button> 
+        <button id="RegisterFace" class="registerFace">Register Face</button>
+        <select id="Passwords" style="width:140px;">
+            <option>Choose a Website</option>
+        </select>
+        <br/> <br/>
+        <span class="text">Password:</span>
+        <input id="emerg" style=width: 180; type="password"/>
+        <button id="EnterButton" class="verifying">Verifying...</button>
+        <div class = "GreatEasterEgg">Easter Egg!</div>
+    </body>
+</html>
